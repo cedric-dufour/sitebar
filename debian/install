@@ -1,0 +1,4 @@
+*.php /usr/share/sitebar/
+inc js lib locale skins sql /usr/share/sitebar/
+debian/config/apache.conf /etc/sitebar/
+debian/config/config.inc.php /etc/sitebar/

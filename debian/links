@@ -1,0 +1,3 @@
+usr/share/doc/sitebar/install.txt          usr/share/sitebar/doc/install.txt           
+usr/share/doc/sitebar/troubleshooting.txt  usr/share/sitebar/doc/troubleshooting.txt
+etc/sitebar/config.inc.php                 usr/share/sitebar/adm/config.inc.php

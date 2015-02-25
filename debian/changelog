@@ -1,0 +1,6 @@
+sitebar (3.4~git20150103) UNRELEASED; urgency=low
+
+  * Debianize upstream (https://github.com/brablc/sitebar)
+
+ -- Cedric Dufour <cedric.dufour@ced-network.net>  Wed, 25 Feb 2015 11:33:35 +0100
+

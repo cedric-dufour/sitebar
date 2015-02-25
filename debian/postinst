@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+case "$1" in
+
+  configure)
+    # Set appropriate permissions
+    chown -R root:www-data /etc/sitebar
+    find /etc/sitebar -type d -exec chmod 750 {} \;
+    find /etc/sitebar -type f -exec chmod 640 {} \;
+
+    # Symlink apache configuration
+    [ -e /etc/apache2/conf-available -a ! -e /etc/apache2/conf-available/sitebar.conf ] && ln -s /etc/sitebar/apache.conf /etc/apache2/conf-available/sitebar.conf
+    ;;
+
+esac
+
+exit 0
+

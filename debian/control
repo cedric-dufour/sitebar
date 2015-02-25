@@ -1,0 +1,19 @@
+Source: sitebar
+Section: web
+Priority: optional
+Maintainer: Cedric Dufour <cedric.dufour@ced-network.net>
+Standards-Version: 3.9.0
+Build-Depends: debhelper (>=5.0)
+Homepage: http://sitebar.org/
+
+Package: sitebar
+Architecture: all
+Depends: ${misc:Depends}, libapache2-mod-php5 | php5-cgi, php5-mysql
+Recommends: mysql-server
+Description: Online Bookmark Manager
+ Manage Online Information Sources Online
+ Online Bookmarks in Any Browser
+ Secure Access at Home and in the Office
+ Bookmark Import and Bookmark Export
+ Bookmark Privacy and Access Control
+
