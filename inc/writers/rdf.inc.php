@@ -34,7 +34,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_rdf extends SB_WriterInterfaceXML
 {
-    function SB_Writer_rdf()
+    function __construct()
     {
         parent::__construct();
     }
@@ -78,7 +78,7 @@ class SB_Writer_rdf extends SB_WriterInterfaceXML
         }
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $this->drawTagOpen('rdf:li');
         $this->drawTagOpen('rdf:Seq', array
@@ -94,7 +94,7 @@ class SB_Writer_rdf extends SB_WriterInterfaceXML
         $this->drawTagClose('rdf:li');
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $this->drawTagOpen('rdf:li');
         $this->drawTag('rss:item', array

@@ -70,7 +70,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 
     var $persistentParams = array('target','mode','w');
 
-    function SB_CommandWindow()
+    function __construct()
     {
         $this->command = SB_reqVal('command');
 
@@ -989,7 +989,8 @@ class SB_CommandWindow extends SB_ErrorHandler
     <div class="data">
         <select <?php echo $this->getFieldParams($params)?>>
 <?php
-            $this->$params['_options'](
+            $method = $params['_options'];
+            $this->$method(
                 isset($params['_select'])?$params['_select']:null,
                 isset($params['_exclude'])?$params['_exclude']:null
                 );
@@ -1024,7 +1025,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 <?php
                 }
 
-                $this->$params['function'](isset($params['params'])?$params['params']:null);
+                $this->{$params['function']}(isset($params['params'])?$params['params']:null);
             }
             elseif (isset($params['type']) &&  $params['type'] == 'callbackextern')
             {
@@ -3546,7 +3547,7 @@ class SB_CommandWindow extends SB_ErrorHandler
             return;
         }
 
-        if ($user->demo)
+        if ($user['demo'])
         {
             $this->um->accessDenied();
             return;

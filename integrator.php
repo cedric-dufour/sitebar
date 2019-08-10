@@ -58,7 +58,7 @@ if (preg_match('/^\w+/', $_GET['lang']))
 {
     SB_SetLanguage($_GET['lang']);
 }
-$um->setParam('user',$_COOKIE['popup_params']);
+// $um->setParam('user',$_COOKIE['popup_params']);
 
 if (isset($_REQUEST['install']))
 {
@@ -109,7 +109,7 @@ $browsers = array
         'platforms'=>'9.0/All',
         'usage' => '',
         'exclude'  =>array(),
-        'extra'  =>array('sitebar_client','sitebar','sidebar','livebookmarks','search_engine','iframe','google'),
+        'extra'  =>array('sitebar_client','sitebar','hotlist','livebookmarks','search_engine','iframe','google'),
     ),
     'konqueror' => array
     (

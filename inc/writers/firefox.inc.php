@@ -23,12 +23,12 @@ require_once('./inc/writers/netscape.inc.php');
 
 class SB_Writer_firefox extends SB_Writer_netscape
 {
-    function SB_Writer_firefox()
+    function __construct()
     {
         parent::__construct();
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $filler = str_repeat("\t", $node->level);
 
@@ -64,7 +64,7 @@ class SB_Writer_firefox extends SB_Writer_netscape
         }
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
     }
 

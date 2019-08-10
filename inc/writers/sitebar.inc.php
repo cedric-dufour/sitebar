@@ -63,7 +63,7 @@ class SB_Writer_sitebar extends SB_WriterInterface
 
     var $appError = null;
 
-    function SB_Writer_sitebar()
+    function __construct()
     {
         parent::__construct();
 
@@ -1019,7 +1019,7 @@ _DOC;
         $toolTip = ($link->comment?substr($link->comment,0,255).(strlen($link->comment)>255?'...':''):$link->origURL);
 
         echo ($this->lmenu?$ifavicon.$this->lmenu.$sort_info:'') .
-             '<a id="a'. $linkname .'" '. ($this->useToolTips?'x_':'').'title="'. $this->quoteAtt($toolTip) . '" '.
+             '<a rel="nofollow" id="a'. $linkname .'" '. ($this->useToolTips?'x_':'').'title="'. $this->quoteAtt($toolTip) . '" '.
              ($class?" class=\"$class\"":'') .
              'href="' . $this->quoteAtt($link->url) . '" '.
              'onmousedown="return SB_go(this,'.$link->id .')" '.
@@ -1064,7 +1064,7 @@ _DOC;
             $this->tree->statistics($stat);
         }
 
-        $this->hook->foot($this->um->config['release'].(SB_DEVELOPMENT?'-svn':''),$stat,$this->um);
+        $this->hook->foot($this->um->config['release'].(SB_DEVELOPMENT?'-git':''),$stat,$this->um);
 
         $sponsor = new SB_SponsorInterface($this->hook);
         $file = './inc/sponsor.inc.php';

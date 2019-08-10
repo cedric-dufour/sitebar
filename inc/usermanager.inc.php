@@ -48,7 +48,7 @@ class SB_UserManager extends SB_ErrorHandler
     var $params = array('config'=>array(),'user'=>array());
     var $hiddenFolders = array();
 
-    function SB_UserManager()
+    function __construct()
     {
         $this->db =& SB_Database::staticInstance();
 
@@ -133,7 +133,7 @@ class SB_UserManager extends SB_ErrorHandler
         $data['groups'] = $rec['count'];
     }
 
-    function & staticInstance()
+    public static function & staticInstance()
     {
         static $um;
 
@@ -179,7 +179,7 @@ class SB_UserManager extends SB_ErrorHandler
                             $sub = "SB_UserManager$count";
                             $sup = ($count>1?'SB_UserManager'.($count-1):'SB_UserManager');
                             $classes .= "class $sub extends $sup\n{\n";
-                            $classes .= "    function $sub() { \$this->$sup(); }\n";
+                            $classes .= "    function __construct() { parent::__construct(); }\n";
                             continue;
                         }
 
@@ -1027,7 +1027,8 @@ class SB_UserManager extends SB_ErrorHandler
             $this->db->update('sitebar_user', array
             (
                 'visits' => array('visits+'=>'1'),
-                'visited'=>array('now'=>null)
+				'visited' => array('now'=>null),
+				'last_ip' => $_SERVER['REMOTE_ADDR'], 
             )
             ,array
             (

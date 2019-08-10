@@ -29,7 +29,7 @@ class SB_Localizer
     var $langDefault = 'en_US';
     var $pluginPaths = array();
 
-    function SB_Localizer()
+    function __construct()
     {
         $this->lang = $this->langDefault;
 
@@ -147,31 +147,6 @@ class SB_Localizer
                             return $lang['dir'];
                         }
                     }
-                }
-            }
-        }
-
-        if (!empty($_SERVER['HTTP_USER_AGENT']))
-        {
-            $str = $_SERVER['HTTP_USER_AGENT'];
-
-            foreach ($this->getLanguages() as $lang)
-            {
-                $dir = str_replace('_','-',$lang['dir']);
-
-                if (eregi('(\(|\[|;[[:space:]])(' . $dir . ')(;|\]|\))', $str))
-                {
-                    return $lang['dir'];
-                }
-            }
-
-            foreach ($this->getLanguages() as $lang)
-            {
-                list($ln,$country) = explode('_',$lang['dir']);
-
-                if (eregi('(\(|\[|;[[:space:]])(' . $ln . ')(;|\]|\))', $str))
-                {
-                    return $lang['dir'];
                 }
             }
         }

@@ -30,13 +30,13 @@ class SB_Token extends SB_ErrorHandler
     var $username;
     var $token;
 
-    function SB_Token()
+    function __construct()
     {
         $this->db =& SB_Database::staticInstance();
         $this->um =& SB_UserManager::staticInstance();
     }
 
-    function & staticInstance()
+    static function & staticInstance()
     {
         static $token;
 

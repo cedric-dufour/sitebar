@@ -29,17 +29,17 @@ class SB_Writer_phplm extends SB_WriterInterface
 {
     var $path = '';
 
-    function SB_Writer_phplm()
+    function __construct()
     {
         parent::__construct();
     }
 
-    function fatal($text)
+    function fatal($text, $arg = null)
     {
         die(".|".$text);
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         if ($node->level==1 && $this->switches['root'])
         {
@@ -57,7 +57,7 @@ class SB_Writer_phplm extends SB_WriterInterface
         ));
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $this->path = implode('/', $this->nodes);
         $comment = preg_replace("/[\n\r]/m",' ',$link->comment);

@@ -24,7 +24,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_sitebar_plain extends SB_WriterInterface
 {
-    function SB_Writer_sitebar_plain()
+    function __construct()
     {
         parent::__construct();
         $this->switches['hits'] = false;
@@ -69,7 +69,7 @@ class SB_Writer_sitebar_plain extends SB_WriterInterface
 <?php
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $filler = str_repeat("\t", $node->level);
 
@@ -90,11 +90,11 @@ class SB_Writer_sitebar_plain extends SB_WriterInterface
         echo $filler . "</dl>\r";
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $filler = str_repeat("\t", $node->level);
 
-        echo $filler . '<dt><a href="' . $link->url . '">' . $link->name . "</a>\r";
+        echo $filler . '<dt><a rel="nofollow" href="' . $link->url . '">' . $link->name . "</a>\r";
 
         if ($link->comment)
         {

@@ -31,7 +31,7 @@ class SB_Writer_xbel_mozilla extends SB_Writer_xbel
 {
     var $metaAttr;
 
-    function SB_Writer_xbel_mozilla()
+    function __construct()
     {
         parent::__construct();
         $this->metaAttr = array('owner' => 'Mozilla');
@@ -88,7 +88,7 @@ class SB_Writer_xbel_mozilla extends SB_Writer_xbel
         $bmkAtt['visited'] = $this->getDateISO8601($link->visited);
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $bmkAtt = array();
         $this->getLinkAttMap($bmkAtt, $node, $link);

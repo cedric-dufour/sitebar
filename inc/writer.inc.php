@@ -56,10 +56,10 @@ class SB_WriterInterface extends SB_Converter
         'flat' => false,
     );
 
-    function SB_WriterInterface()
+    function __construct()
     {
         $this->um =& SB_UserManager::staticInstance();
-        $this->SB_Converter($this->um->getParam('config','use_conv_engine'));
+        parent::__construct($this->um->getParam('config','use_conv_engine'));
         $this->tree =& SB_Tree::staticInstance();
 
         // Set the default value accordingly
@@ -537,16 +537,9 @@ class SB_WriterInterface extends SB_Converter
                             $child->url{0}=='m' && strpos($child->url,'mailto:')!==false
                         );
 
-                    if ($child->id && !$child->ignoreHits && false)
+                    if ($child->id && !$child->ignoreHits)
                     {
-                        if ($this->switches['shorten'])
-                        {
-                            $child->url = 'go.php?id='.$child->id;
-                        }
-                        else
-                        {
-                            $child->url = SB_Page::absBaseUrl().'go.php?id='.$child->id.'&url='.urlencode($child->getUrl());
-                        }
+                        $child->url = 'go.php?id='.$child->id;
                     }
                 }
 
@@ -665,9 +658,9 @@ class SB_WriterInterface extends SB_Converter
 
 class SB_WriterInterfaceXML extends SB_WriterInterface
 {
-    function SB_WriterInterfaceXML()
+    function __construct()
     {
-        $this->SB_WriterInterface();
+        parent::__construct();
     }
 
     function quoteAtt($value)
