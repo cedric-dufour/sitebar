@@ -1,3 +1,9 @@
+sitebar (3.6.2~git20190616) UNRELEASED; urgency=low
+
+  * Latest upstream snapshot
+
+ -- Cédric Dufour <cedric.dufour@ced-network.net>  Sat, 10 Aug 2019 15:03:48 +0200
+
 sitebar (3.4~git20150103) UNRELEASED; urgency=low
 
   * Debianize upstream (https://github.com/brablc/sitebar)

@@ -8,12 +8,18 @@ Homepage: http://sitebar.org/
 
 Package: sitebar
 Architecture: all
-Depends: ${misc:Depends}, libapache2-mod-php5 | php5-cgi, php5-mysql
-Recommends: mysql-server
-Description: Online Bookmark Manager
+Depends: sitebar-3rdparty, libapache2-mod-php | php-fpm | php-cgi | libapache2-mod-php5 | php5-fpm | php5-cgi, php-mysql | php5-mysql
+Recommends: mariadb-server | mysql-server
+Description: Sitebar (Online Bookmark Manager)
  Manage Online Information Sources Online
  Online Bookmarks in Any Browser
  Secure Access at Home and in the Office
  Bookmark Import and Bookmark Export
  Bookmark Privacy and Access Control
+
+Package: sitebar-3rdparty
+Architecture: all
+Depends: sitebar
+Description: Sitebar (Online Bookmark Manager) - 3rd-party dependencies
+ WARNING: Separate licenses apply!
 
