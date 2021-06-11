@@ -254,15 +254,31 @@ class SB_UserManager extends SB_ErrorHandler
             $expires = time()-60*60;
         }
 
-        if (version_compare(PHP_VERSION, "5.2.0", ">="))
-        {
-            // set HttpOnly if PHP supports it
-            setcookie($name, $value, $expires, "/", "", isset($_SERVER["HTTPS"]), $httponly);
-        }
-        else
+        // Handle really old PHP versions prio PHP V5.2
+        if (version_compare(PHP_VERSION, "5.2.0", "<"))
         {
             setcookie($name, $value, $expires, "/", "", isset($_SERVER["HTTPS"]));
         }
+        // Use old setcookie() signature and SameSite workaround for PHP versions prio V7.3.0
+        elseif (version_compare(PHP_VERSION, "7.3.0", "<"))
+        {
+            // set HttpOnly if PHP supports it
+            setcookie($name, $value, $expires, "/; SameSite=None", "", isset($_SERVER["HTTPS"]), $httponly);
+        }
+        // as of PHP 7.3 setcookie supports `SameSite` parameter via the options array
+        else
+        {
+            $arr_cookie_options = array (
+                'expires' => $expires,
+                'path' => '/',
+                'domain' => '',
+                'secure' => isset($_SERVER["HTTPS"]),
+                'httponly' => $httponly,
+                'samesite' => 'None' // None || Lax  || Strict
+                );
+            setcookie($name, $value, $arr_cookie_options);
+        }
+
         $_COOKIE[$name] = $value;
     }
 
@@ -1835,6 +1851,14 @@ class SB_UserManager extends SB_ErrorHandler
     function getGroup($gid)
     {
         $rset = $this->db->select(null, 'sitebar_group', array( 'gid'=> $gid), 'uid, name');
+        $groups = $this->db->fetchRecords($rset);
+        $this->enrichGroups($groups);
+        return $groups[0];
+    }
+
+    function getGroupByName($name)
+    {
+        $rset = $this->db->select(null, 'sitebar_group', array( 'name'=> $name), 'uid, name');
         $groups = $this->db->fetchRecords($rset);
         $this->enrichGroups($groups);
         return $groups[0];
